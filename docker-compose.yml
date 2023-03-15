@@ -1,0 +1,19 @@
+version: '3'
+services:
+  web:
+    build:
+      context: .                     #where do you need the files to be pulled from. In our case current directory
+      dockerfile: Dockerfile.dev 
+    ports:
+      - "3000:3000"
+    volumes:                         #used to provide reference or map the local files with the container. Reflects the dynamic changes in the source code.
+      - /app/node_modules            #we write this step because there is no node_modules present in the local. It is only present in the container
+      - .:/app                       #referencing the current directory with the container
+  tests:
+    build:
+      context: .                     #where do you need the files to be pulled from. In our case current directory
+      dockerfile: Dockerfile.dev 
+    volumes:                         #used to provide reference or map the local files with the container. Reflects the dynamic changes in the source code.
+      - /app/node_modules            #we write this step because there is no node_modules present in the local. It is only present in the container
+      - .:/app                       #referencing the current directory with the container
+    command: ["npm", "run", "test"]  #overriding the cmd of the dockerfile because we need to run the test service here   

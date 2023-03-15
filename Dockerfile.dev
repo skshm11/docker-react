@@ -1,0 +1,13 @@
+#Dockerfile specifically for dev branch and not for production
+
+FROM node:alpine
+
+WORKDIR '/app'
+
+#Copying package.json file into the current working dir i.e. /app
+COPY package.json .
+RUN npm install
+
+COPY . . 
+
+CMD ["npm", "run", "start"]
