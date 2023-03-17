@@ -1,0 +1,9 @@
+sudo : required   #states we need to have the major permissions
+services:
+  - docker        #states that we need docker to be installed in the container
+
+before_install:
+  - docker build -t snasa/docker-react -f Dockerfile.dev .  #states that we need to build the image using dockerfile.dev
+
+script:
+  - docker run -e CI=true snasa/docker-react npm run test  
