@@ -15,7 +15,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          The data has been changed.
+          Created a Production-Grade Workflow of a single image using single container.
         </a>
       </header>
     </div>
