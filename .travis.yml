@@ -6,4 +6,16 @@ before_install:
   - docker build -t snasa/docker-react -f Dockerfile.dev .  #states that we need to build the image using dockerfile.dev
 
 script:
-  - docker run -e CI=true snasa/docker-react npm run test  
+  - docker run -e CI=true snasa/docker-react npm run test 
+
+ deploy:
+  provider: elasticbeanstalk  # travis ci comes pre installed with different type of hosting or deployment server   
+  region: "ap-south-1"        # region of ebs environment created
+  app: "docker-react"   #application name that we created initially 
+  env: ""               #env name which is created once the ebs insatnce is created
+  bucket_name:""          #S3 bucket name where the the zip file(created by travis ci) containing all the files will be sent by the travisCI
+  bucket_path:""
+  on:
+    branch: master  #states that only to deploy when the code is pushed on the master branch otherwise do not deploy
+access_key_id: $AWS_ACCESS_KEY
+secret_access_key: $AWS_SECRET_KEY    
