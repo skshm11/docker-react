@@ -11,6 +11,8 @@ RUN npm run build
 
 #Run Phase(2nd base image)
 FROM nginx
+#port mapping for incoming traffic. EBS do the mapping automatically 
+EXPOSE 80
 # We copy data from the first phase therefore we use the following syntax.
 # All the data that we need for production is available in the /app/build, therefore we only copy that data into the container
 # /usr/share/nginx/html -> this is the default path where the data should be stored in the container
